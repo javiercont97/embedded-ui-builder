@@ -1,0 +1,29 @@
+#ProjectSelector {
+    background-color: #2b2b2e;
+}
+
+QPushButton {
+    color: white;
+    background-color: #1b1b1e;
+    min-width: 10em;
+    min-height: 2em;
+    text-align: left;
+    padding: 6px;
+    border-radius: 0px;
+}
+
+QPushButton::hover {
+    background-color: #3b3b3e;
+}
+
+#cloneBtn {
+    icon: url(:/icons/version-control.png)
+}
+
+#openBtn {
+    icon: url(:/icons/open-project.png)
+}
+
+#createBtn {
+    icon: url(:/icons/new-project.png)
+}
