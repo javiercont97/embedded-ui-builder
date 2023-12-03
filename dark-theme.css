@@ -1,12 +1,10 @@
-#ProjectSelector {
+QWidget {
     background-color: #2b2b2e;
 }
 
 QPushButton {
     color: white;
     background-color: #1b1b1e;
-    min-width: 10em;
-    min-height: 2em;
     text-align: left;
     padding: 6px;
     border-radius: 0px;
@@ -16,14 +14,53 @@ QPushButton::hover {
     background-color: #3b3b3e;
 }
 
+#cloneBtn,
+#openBtn,
+#createBtn {
+    min-width: 10em;
+    min-height: 2em;
+}
+
 #cloneBtn {
-    icon: url(:/icons/version-control.png)
+    icon: url(:/icons/version-control.png);
 }
 
 #openBtn {
-    icon: url(:/icons/open-project.png)
+    icon: url(:/icons/open-project.png);
 }
 
 #createBtn {
-    icon: url(:/icons/new-project.png)
+    icon: url(:/icons/new-project.png);
+}
+
+#settingsBtn {
+    icon: url(:/icons/gear.png);
+    min-width: 1em;
+    max-width: 1em;
+    border-radius: 0.9em;
+}
+
+QCheckBox::indicator {
+    border: 1px solid #4b4b4e;
+    max-height: 1em;
+    max-width: 1em;
+}
+
+QCheckBox::indicator:checked {
+    image: url(:/icons/close.png);
+}
+
+QLineEdit {
+    border: 1px solid #4b4b4e;
+    border-radius: 8px;
+    padding: 1 10px;
+    selection-background-color: #4b4b4e;
+}
+
+QLineEdit::focus {
+    border: 1px solid #009be6;
+}
+
+QLineEdit[showerror=true] {
+    border: 1px solid #ba0000;
 }

@@ -28,10 +28,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         icons.qrc
         services/projectsservice.h services/projectsservice.cpp
-        dto/project.h dto/project.cpp
-        wizards/newprojectwizard.h wizards/newprojectwizard.cpp
+        dto/projectdto.h dto/projectdto.cpp
         LICENSE
         README.md
+        dto/createprojectdto.h dto/createprojectdto.cpp
+        wizards/newprojectwizard.h wizards/newprojectwizard.cpp wizards/newprojectwizard.ui
+        wizards/settings/settingsmenu.h wizards/settings/settingsmenu.cpp wizards/settings/settingsmenu.ui
 
     )
 # Define target properties for Android with Qt 6 as:

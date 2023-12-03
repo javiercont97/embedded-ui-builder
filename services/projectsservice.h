@@ -1,27 +1,28 @@
 #ifndef PROJECTSSERVICE_H
 #define PROJECTSSERVICE_H
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QSettings>
 
-#include "../dto/project.h"
+#include "../dto/projectdto.h"
 
 class ProjectsService : public QObject {
-    Q_OBJECT
-public:
-    explicit ProjectsService(QObject *parent = nullptr);
+	Q_OBJECT
+   public:
+	explicit ProjectsService(QObject *parent = nullptr);
 
-    QList<Project> getRecentProjectsList() const;
+	ProjectDTO createNewProject();
+	QList<ProjectDTO> getRecentProjectsList() const;
 
-private:
-    void loadRecentProjects();
-    void saveRecentProjects();
-    void clearRecentProjects();
+   private:
+	void loadRecentProjects();
+	void saveRecentProjects();
+	void clearRecentProjects();
 
-private:
-    Project currentProject;
-    QList<Project> recentProjectsList;
+   private:
+	ProjectDTO currentProject;
+	QList<ProjectDTO> recentProjectsList;
 };
 
-#endif // PROJECTSSERVICE_H
+#endif	// PROJECTSSERVICE_H

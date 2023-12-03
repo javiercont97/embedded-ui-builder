@@ -1,13 +1,38 @@
 #ifndef NEWPROJECTWIZARD_H
 #define NEWPROJECTWIZARD_H
 
-#include <QWizard>
-#include <QObject>
+#include <QDialog>
+#include "../dto/createprojectdto.h"
 
-class NewProjectWizard : public QWizard
-{
-public:
-    NewProjectWizard();
+namespace Ui {
+class NewProjectWizard;
+}
+
+class NewProjectWizard : public QDialog {
+	Q_OBJECT
+
+   public:
+	explicit NewProjectWizard(QWidget *parent = nullptr);
+	~NewProjectWizard();
+
+   private:
+	void setupEventConnections();
+	void setupValidators();
+	void clearFields();
+
+   signals:
+   void projectCreated(CreateProjectDTO &project);
+
+   private slots:
+	void onUICheckboxChanged(int state);
+	void onProjectNameChanged(QString text);
+	void onPathChanged(QString path);
+	void onCancelClicked();
+	void onBrowseClicked();
+	void onCreateClicked();
+
+   private:
+	Ui::NewProjectWizard *ui;
 };
 
-#endif // NEWPROJECTWIZARD_H
+#endif	// NEWPROJECTWIZARD_H
