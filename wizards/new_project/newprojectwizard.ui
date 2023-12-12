@@ -33,30 +33,9 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Project name</string>
+        <string>Project location</string>
        </property>
       </widget>
-     </item>
-     <item row="1" column="1">
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLineEdit" name="projectLocation">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string>Full project path</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="browseBtn">
-         <property name="text">
-          <string>Browse</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_2">
@@ -90,6 +69,13 @@
       <widget class="QLabel" name="label_4">
        <property name="text">
         <string>Has a UI</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="BrowseComponent" name="projectLocation" native="true">
+       <property name="focusPolicy">
+        <enum>Qt::TabFocus</enum>
        </property>
       </widget>
      </item>
@@ -128,6 +114,22 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BrowseComponent</class>
+   <extends>QWidget</extends>
+   <header>components\browse\browsecomponent.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>projectName</tabstop>
+  <tabstop>projectLocation</tabstop>
+  <tabstop>device</tabstop>
+  <tabstop>hasUI</tabstop>
+  <tabstop>createProjectBtn</tabstop>
+  <tabstop>cancelBtn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

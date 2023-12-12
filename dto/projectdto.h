@@ -10,9 +10,13 @@
 class ProjectDTO : public QObject {
 	Q_OBJECT
    public:
-	explicit ProjectDTO(QObject *parent = nullptr);
+	explicit ProjectDTO(QString path, QObject *parent = nullptr);
 
-   private:
+private:
+	void saveProject();
+
+   public:
+	QString location;
 	QString projectName;
 	QDate lastModified;
 	QString device;

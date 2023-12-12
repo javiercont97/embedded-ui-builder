@@ -2,7 +2,7 @@
 #define NEWPROJECTWIZARD_H
 
 #include <QDialog>
-#include "../dto/createprojectdto.h"
+#include "../../dto/createprojectdto.h"
 
 namespace Ui {
 class NewProjectWizard;
@@ -26,9 +26,7 @@ class NewProjectWizard : public QDialog {
    private slots:
 	void onUICheckboxChanged(int state);
 	void onProjectNameChanged(QString text);
-	void onPathChanged(QString path);
 	void onCancelClicked();
-	void onBrowseClicked();
 	void onCreateClicked();
 
    private:

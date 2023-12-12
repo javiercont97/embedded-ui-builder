@@ -1,7 +1,6 @@
 #include "newprojectwizard.h"
 
 #include <QDir>
-#include <QFileDialog>
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
@@ -14,6 +13,8 @@ NewProjectWizard::NewProjectWizard(QWidget *parent)
 	ui->setupUi(this);
 	this->setupEventConnections();
 	this->setupValidators();
+	this->ui->projectLocation->setPlaceholderText("Project location");
+	this->ui->projectLocation->setMode(BrowseMode::DIRECTORY);
 }
 
 NewProjectWizard::~NewProjectWizard() { delete ui; }
@@ -25,10 +26,6 @@ void NewProjectWizard::setupEventConnections() {
 			&NewProjectWizard::onCancelClicked);
 	connect(this->ui->projectName, &QLineEdit::textChanged, this,
 			&NewProjectWizard::onProjectNameChanged);
-	connect(this->ui->projectLocation, &QLineEdit::textChanged, this,
-			&NewProjectWizard::onPathChanged);
-	connect(this->ui->browseBtn, &QPushButton::clicked, this,
-			&NewProjectWizard::onBrowseClicked);
 	connect(this->ui->createProjectBtn, &QPushButton::clicked, this,
 			&NewProjectWizard::onCreateClicked);
 }
@@ -36,17 +33,14 @@ void NewProjectWizard::setupEventConnections() {
 void NewProjectWizard::setupValidators() {
 	this->ui->projectName->setValidator(new QRegularExpressionValidator(
 		QRegularExpression("[a-z,A-Z][a-z,A-Z,_]*"), this->ui->projectName));
+		
 }
 
 void NewProjectWizard::clearFields() {
 	this->ui->projectName->setText("");
 	this->ui->projectName->setProperty("showerror", false);
 	this->ui->projectName->style()->polish(this->ui->projectName);
-
-	this->ui->projectLocation->setText("");
-	this->ui->projectLocation->setProperty("showerror", false);
-	this->ui->projectLocation->style()->polish(this->ui->projectLocation);
-
+	this->ui->projectLocation->clearFields();
 	this->ui->device->setCurrentIndex(0);
 	this->ui->hasUI->setCheckState(Qt::CheckState::Unchecked);
 }
@@ -70,33 +64,9 @@ void NewProjectWizard::onProjectNameChanged(QString text) {
 	this->ui->projectName->style()->polish(this->ui->projectName);
 }
 
-void NewProjectWizard::onPathChanged(QString path) {
-	int cursor = 0;
-
-	QDir location(path);
-	if (!location.exists()) {
-		this->ui->projectLocation->setProperty("showerror", true);
-	} else {
-		this->ui->projectLocation->setProperty("showerror", false);
-	}
-	this->ui->projectLocation->style()->polish(this->ui->projectLocation);
-}
-
 void NewProjectWizard::onCancelClicked() {
 	this->clearFields();
 	this->reject();
-}
-
-void NewProjectWizard::onBrowseClicked() {
-	QSettings settings;
-	QString path = QFileDialog::getExistingDirectory(
-		this, "Project location",
-		settings.value("lastNewProjectPath").toString(),
-		QFileDialog::Option::ShowDirsOnly);
-	if (path.isEmpty()) return;
-
-	ui->projectLocation->setText(path);
-	settings.setValue("lastNewProjectPath", path);
 }
 
 void NewProjectWizard::onCreateClicked() {
@@ -106,9 +76,8 @@ void NewProjectWizard::onCreateClicked() {
 		this->ui->projectName->style()->polish(this->ui->projectName);
 		error = true;
 	}
-	if (this->ui->projectLocation->text().isEmpty()) {
-		this->ui->projectLocation->setProperty("showerror", true);
-		this->ui->projectLocation->style()->polish(this->ui->projectLocation);
+	if (this->ui->projectLocation->getPath().isEmpty()) {
+		this->ui->projectLocation->showError();
 		error = true;
 	}
 
@@ -117,9 +86,14 @@ void NewProjectWizard::onCreateClicked() {
 							  "Please fill all the required fields");
 		return;
 	}
+	QDir targetLocation(this->ui->projectLocation->getPath());
+	if (targetLocation.exists("embedded-package.json")) {
+		QMessageBox::StandardButton response = QMessageBox::question(this, "Override project", "Do you want to override existing project?");
+		if (response == QMessageBox::StandardButton::No)return;
+	}
 	
 	CreateProjectDTO project(
-		this->ui->projectName->text(), this->ui->projectLocation->text(),
+		this->ui->projectName->text(), this->ui->projectLocation->getPath(),
 		this->ui->device->currentText(), this->ui->hasUI->isChecked());
 	emit this->projectCreated(project);
 	this->clearFields();

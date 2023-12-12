@@ -6,15 +6,15 @@
 #include <QStyleFactory>
 #include <QTranslator>
 
-#include "projectselector.h"
+#include "editor/editor.h"
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
-	ProjectSelector w;
-
 	QCoreApplication::setOrganizationName("guibuilder");
 	QCoreApplication::setOrganizationDomain("no domain");
 	QCoreApplication::setApplicationName("GUI Builder for Mbed");
+
+	Editor w;
 
 	a.setStyle("Fusion");
 
