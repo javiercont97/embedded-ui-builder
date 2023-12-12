@@ -1,0 +1,32 @@
+{
+    "files.associations": {
+        "qsettings": "cpp",
+        "qregularexpressionvalidator": "cpp",
+        "qregularexpression": "cpp",
+        "qfiledialog": "cpp",
+        "qdialog": "cpp",
+        "string_view": "cpp",
+        "*.tcc": "cpp",
+        "list": "cpp",
+        "qtableview": "cpp",
+        "new": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "qlistwidget": "cpp",
+        "qobject": "cpp",
+        "qdir": "cpp",
+        "qfile": "cpp",
+        "qlist": "cpp"
+    },
+    "cSpell.words": [
+        "BROWSECOMPONENT",
+        "CREATEPROJECTDTO",
+        "NEWPROJECTWIZARD",
+        "PROJECTSELECTOR",
+        "PROJECTSSERVICE",
+        "SETTINGSMENU",
+        "showerror"
+    ]
+}
