@@ -27,13 +27,23 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         icons.qrc
-        services/projectsservice.h services/projectsservice.cpp
-        dto/project.h dto/project.cpp
-        wizards/newprojectwizard.h wizards/newprojectwizard.cpp
         LICENSE
         README.md
+        
+        components/browse/browsecomponent.h components/browse/browsecomponent.cpp components/browse/browsecomponent.ui
+        components/sidebar/sidebar.h components/sidebar/sidebar.cpp components/browse/browsecomponent.ui
 
+        services/projectservice.h services/projectservice.cpp
+        dto/createprojectdto.h dto/createprojectdto.cpp
+        dto/projectdto.h dto/projectdto.cpp
+
+        wizards/new_project/newprojectwizard.h wizards/new_project/newprojectwizard.cpp wizards/new_project/newprojectwizard.ui
+        wizards/settings/settingsmenu.h wizards/settings/settingsmenu.cpp wizards/settings/settingsmenu.ui
+
+        editor/editor.h editor/editor.cpp editor/editor.ui
     )
+
+    target_include_directories(GUIBuilder PRIVATE ${PROJECT_SOURCE_DIR})
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET GUIBuilder APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

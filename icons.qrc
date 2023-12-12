@@ -3,6 +3,11 @@
         <file>icons/new-project.png</file>
         <file>icons/open-project.png</file>
         <file>icons/version-control.png</file>
+        <file>icons/close.png</file>
+        <file>icons/gear.png</file>
+        <file>icons/file.png</file>
+        <file>icons/find.png</file>
+        <file>icons/plugins.png</file>
     </qresource>
     <qresource prefix="/themes">
         <file>dark-theme.css</file>
